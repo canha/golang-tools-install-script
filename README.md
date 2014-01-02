@@ -1,11 +1,12 @@
-golang-user-install-script
+golang-tools-install-script
 ==========================
 
 Bash script to automate Go language tools single user installation (Linux) or even removal.
+Latest filename for download at the time of this writting was for version 1.2 of Go. Feel free to change the variables on the beggining to match whatever version you need.
 
-For 32-bit:
+To install 32-bit:
 <blockquote>bash main.sh --32</blockquote>
-For 64-bit
+To install 64-bit
 <blockquote>bash main.sh --64</blockquote>
 
 To remove any changes call:
