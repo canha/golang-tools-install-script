@@ -6,11 +6,11 @@ elif [ "$1" == "--64" ]; then
 elif [ "$1" == "--remove" ]; then
     rm -rf $HOME/.go/
     rm -rf $HOME/go/
-    sed -i '/# GoLang/d' .profile
-    sed -i '/export GOROOT/d' .profile
-    sed -i '/:$GOROOT/d' .profile
-    sed -i '/export GOPATH/d' .profile
-    sed -i '/:$GOPATH/d' .profile
+    sed -i '/# GoLang/d' $HOME/.profile
+    sed -i '/export GOROOT/d' $HOME/.profile
+    sed -i '/:$GOROOT/d' $HOME/.profile
+    sed -i '/export GOPATH/d' $HOME/.profile
+    sed -i '/:$GOPATH/d' $HOME/.profile
     echo "Go removed!"
     exit 0
 else
@@ -30,14 +30,14 @@ fi
 
 tar -C $HOME -xzf /tmp/go.tar.gz
 mv $HOME/go $HOME/.go
-touch .profile
-echo '# GoLang' >> .profile
-echo 'export GOROOT=$HOME/.go' >> .profile
-echo 'export PATH=$PATH:$GOROOT/bin' >> .profile
+touch $HOME/.profile
+echo '# GoLang' >> $HOME/.profile
+echo 'export GOROOT=$HOME/.go' >> $HOME/.profile
+echo 'export PATH=$PATH:$GOROOT/bin' >> $HOME/.profile
 mkdir -p $HOME/go/src
 mkdir -p $HOME/go/pkg
 mkdir -p $HOME/go/bin
-echo 'export GOPATH=$HOME/go' >> .profile
-echo 'export PATH=$PATH:$GOPATH/bin' >> .profile
-source .profile
+echo 'export GOPATH=$HOME/go' >> $HOME/.profile
+echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.profile
+source $HOME/.profile
 rm -f /tmp/go.tar.gz
