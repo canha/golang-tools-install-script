@@ -18,7 +18,6 @@ else
     exit 1
 fi
 
-
 if [ -d $HOME/.go ] || [ -d $HOME/go ]; then
     echo "Installation directories already exist. Exiting."
     exit 1
@@ -28,8 +27,10 @@ if [ $? -ne 0 ]; then
     echo "Download failed! Exiting."
     exit 1
 fi
+
 tar -C $HOME -xzf /tmp/go.tar.gz
-mv go/ .go/
+mv $HOME/go $HOME/.go
+touch .profile
 echo '# GoLang' >> .profile
 echo 'export GOROOT=$HOME/.go' >> .profile
 echo 'export PATH=$PATH:$GOROOT/bin' >> .profile
