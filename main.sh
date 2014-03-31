@@ -1,5 +1,5 @@
 #!/bin/bash
-$VERSION="1.2.1"
+VERSION="1.2.1"
 
 if [ "$1" == "--32" ]; then
     DFILE="go$VERSION.linux-386.tar.gz"
