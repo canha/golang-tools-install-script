@@ -1,8 +1,10 @@
 #!/bin/bash
+$VERSION="1.2.1"
+
 if [ "$1" == "--32" ]; then
-    DFILE="go1.2.linux-386.tar.gz"
+    DFILE="go$VERSION.linux-386.tar.gz"
 elif [ "$1" == "--64" ]; then
-    DFILE="go1.2.linux-amd64.tar.gz"
+    DFILE="go$VERSION.linux-amd64.tar.gz"
 elif [ "$1" == "--remove" ]; then
     rm -rf $HOME/.go/
     rm -rf $HOME/go/
