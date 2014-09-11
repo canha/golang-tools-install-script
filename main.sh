@@ -41,5 +41,7 @@ mkdir -p $HOME/go/pkg
 mkdir -p $HOME/go/bin
 echo 'export GOPATH=$HOME/go' >> $HOME/.profile
 echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.profile
+export PATH=$PATH:$HOME/.go
+export PATH=$PATH:$HOME/go
 source $HOME/.profile
 rm -f /tmp/go.tar.gz
