@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1.2.1"
+VERSION="1.3.1"
 
 if [ "$1" == "--32" ]; then
     DFILE="go$VERSION.linux-386.tar.gz"
@@ -24,7 +24,8 @@ if [ -d $HOME/.go ] || [ -d $HOME/go ]; then
     echo "Installation directories already exist. Exiting."
     exit 1
 fi
-wget https://go.googlecode.com/files/$DFILE -O /tmp/go.tar.gz
+
+wget https://storage.googleapis.com/golang/$DFILE -O /tmp/go.tar.gz
 if [ $? -ne 0 ]; then
     echo "Download failed! Exiting."
     exit 1
