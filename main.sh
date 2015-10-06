@@ -1,13 +1,9 @@
 #!/bin/bash
-VERSION="1.4.2"
 
-if [ "$1" == "--32" ]; then
-    DFILE="go$VERSION.linux-386.tar.gz"
-elif [ "$1" == "--64" ]; then
-    DFILE="go$VERSION.linux-amd64.tar.gz"
-elif [ "$1" == "--remove" ]; then
-    rm -rf "$HOME/.go/"
-    rm -rf "$HOME/go/"
+DFILE="go$1.linux-amd64.tar.gz"
+if [ "$2" == "--remove" ]; then
+    rm -rf "$HOME/.go$1/"
+    rm -rf "$HOME/go$1/"
     sed -i '/# GoLang/d' "$HOME/.profile"
     sed -i '/export GOROOT/d' "$HOME/.profile"
     sed -i '/:$GOROOT/d' "$HOME/.profile"
@@ -16,11 +12,10 @@ elif [ "$1" == "--remove" ]; then
     echo "Go removed!"
     exit 0
 else
-    echo "Please use --32 or --64 as the argument to this script to specify the version to install. Exiting."
-    exit 1
+    echo "supply a version or --remove to remove go."
 fi
 
-if [ -d "$HOME/.go" ] || [ -d "$HOME/go" ]; then
+if [ -d "$HOME/.go$1" ] || [ -d "$HOME/go$1" ]; then
     echo "Installation directories already exist. Exiting."
     exit 1
 fi
@@ -32,16 +27,16 @@ if [ $? -ne 0 ]; then
 fi
 
 tar -C "$HOME" -xzf /tmp/go.tar.gz
-mv "$HOME/go" "$HOME/.go"
+mv "$HOME/go" "$HOME/.go$1"
 touch "$HOME/.profile"
 {
-    echo '# GoLang'
-    echo 'export GOROOT=$HOME/.go'
-    echo 'export PATH=$PATH:$GOROOT/bin'
-    echo 'export GOPATH=$HOME/go'
-    echo 'export PATH=$PATH:$GOPATH/bin'
-} >> "$HOME/.profile"
+    echo -e "# Go $1 \
+export GOROOT=$HOME/.go$1 \
+export PATH=$PATH:$GOROOT/bin \
+export GOPATH=$HOME/go$1 \
+export PATH=$PATH:$GOPATH/bin"
+} >> "$HOME"/.profile
 
-mkdir -p "$HOME/go/{src,pkg,bin}"
+mkdir -p "$HOME"/go"$1"/{src,pkg,bin}
 source "$HOME/.profile"
 rm -f /tmp/go.tar.gz
