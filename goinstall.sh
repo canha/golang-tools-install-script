@@ -6,15 +6,21 @@ VERSION="1.7"
 print_help() {
     echo "Usage: bash goinstall.sh OPTION"
     echo -e "\nOPTIONS:"
+    echo -e "  --1.6\t\tInstall go1.6 version"
+    echo -e "  --1.7\t\tInstall go1.7 version"
     echo -e "  --32\t\tInstall 32-bit version"
     echo -e "  --64\t\tInstall 64-bit version"
     echo -e "  --remove\tTo remove currently installed version"
 }
 
-if [ "$1" == "--32" ]; then
-    DFILE="go$VERSION.linux-386.tar.gz"
-elif [ "$1" == "--64" ]; then
-    DFILE="go$VERSION.linux-amd64.tar.gz"
+if [ "$1" == "install" ]; then
+    VERSION="$2"
+    VERSION=${VERSION:2}
+    if [ "$3" == "--32" ]; then
+        DFILE="go$VERSION.linux-386.tar.gz"
+    elif [ "$3" == "--64" ]; then
+        DFILE="go$VERSION.linux-amd64.tar.gz"
+    fi
 elif [ "$1" == "--remove" ]; then
     rm -rf "$HOME/.go/"
     rm -rf "$HOME/go/"
