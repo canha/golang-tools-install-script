@@ -8,6 +8,7 @@ print_help() {
     echo -e "\nOPTIONS:"
     echo -e "  --32\t\tInstall 32-bit version"
     echo -e "  --64\t\tInstall 64-bit version"
+    echo -e "  --arm\t\tInstall armv6 version"
     echo -e "  --remove\tTo remove currently installed version"
 }
 
@@ -15,6 +16,8 @@ if [ "$1" == "--32" ]; then
     DFILE="go$VERSION.linux-386.tar.gz"
 elif [ "$1" == "--64" ]; then
     DFILE="go$VERSION.linux-amd64.tar.gz"
+elif [ "$1" == "--arm" ]; then
+    DFILE="go$VERSION.linux-armv6l.tar.gz"
 elif [ "$1" == "--remove" ]; then
     rm -rf "$HOME/.go/"
     rm -rf "$HOME/go/"
