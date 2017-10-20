@@ -1,4 +1,4 @@
-#golang-tools-install-script
+# golang-tools-install-script
 
 Bash script to automate Go language tools single user installation (Linux) or even removal.
 Latest filename for download at the time of this writting was for version 1.9.1 of Go. Feel free to change the variables on the beggining to match whatever version you need.
@@ -7,8 +7,7 @@ By default the script export env variables in .bashrc but you can pass it the fl
 Tested with:
  - Ubuntu/Mint/Debian (17/10/2015)
  - Ubuntu (20/10/2017)
-
-TODO: test on Darwin
+ - MacOSX Sierra (Darwin)
 
 ### 1. Download with wget or your preferred download method:
 ```shell
@@ -25,6 +24,10 @@ $ bash goinstall.sh --64
 $ bash goinstall.sh --32
 ```
 
+### 3. To install on Darwin
+```shell
+$ bash goinstall.sh --darwin
+```
 ### 3. To remove any changes call:
 ```shell
 $ bash goinstall.sh --remove
