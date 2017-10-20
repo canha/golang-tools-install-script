@@ -21,8 +21,7 @@ if [[ " ${shell_versions[*]} " == *"$2"* ]];then
     prefix="--"
     shell_profile="${2#$prefix}rc"
 else
-    echo "no shell specified, exiting"
-    exit 1
+    shell_profile="bashrc"
 fi
 
 if [ "$1" == "--32" ]; then
