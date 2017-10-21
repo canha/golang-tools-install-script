@@ -7,7 +7,7 @@ By default the script export env variables in .bashrc but you can pass it the fl
 Tested with:
  - Ubuntu/Mint/Debian (17/10/2015)
  - Ubuntu (20/10/2017)
- - MacOSX Sierra (Darwin)
+ - MacOSX Sierra / Darwin (20/10/2017)
 
 ### 1. Download with wget or your preferred download method:
 ```shell

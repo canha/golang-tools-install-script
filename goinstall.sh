@@ -17,7 +17,7 @@ print_help() {
 
 shell_versions=("--bash" "--zsh")
 
-if [[ " ${shell_versions[*]} " == *"$2"* ]];then
+if [[ " ${shell_versions[*]} " == *"$2"* && "$2" != "" ]]  ;then
     prefix="--"
     shell_profile="${2#$prefix}rc"
 else
