@@ -9,8 +9,8 @@ print_help() {
     echo -e "  --32\t\tInstall 32-bit version"
     echo -e "  --64\t\tInstall 64-bit version"
     echo -e "  --arm\t\tInstall armv6 version"
-    echo -e "  --darwin\t\tInstall darwin version"
-    echo -e "  --zsh\tYour shell version"
+    echo -e "  --darwin\tInstall darwin version"
+    echo -e "  --zsh\t\tYour shell version"
     echo -e "  --bash\tYour shell version"
     echo -e "  --remove\tTo remove currently installed version"
 }
