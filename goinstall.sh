@@ -13,16 +13,13 @@ print_help() {
     echo -e "  --remove\tTo remove currently installed version"
 }
 
-test(){
-    if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
+if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
     # assume Zsh
     shell_profile="zshrc"
-    elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
+elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
     # assume Bash
     shell_profile="bashrc"
-    fi
-}
-
+fi
 
 if [ "$1" == "--32" ]; then
     DFILE="go$VERSION.linux-386.tar.gz"

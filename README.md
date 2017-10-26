@@ -2,13 +2,11 @@
 
 Bash script to automate Go language tools single user installation (Linux) or even removal.
 Latest filename for download at the time of this writting was for version 1.9.1 of Go. Feel free to change the variables on the beggining to match whatever version you need.
-By default the script export env variables in .bashrc but you can pass it the flag --zsh if you are a zsh user for write the exports in your .zshrc .
 
 Tested with:
 
 * Ubuntu/Mint/Debian (17/10/2015)
-* Ubuntu (20/10/2017)
-* MacOSX Sierra / Darwin (20/10/2017)
+* Ubuntu/MacOSX Sierra (20/10/2017)
 
 ## 1. Installation
 
