@@ -1,28 +1,28 @@
 #!/bin/bash
 set -e
 
-VERSION="1.9.1"
+VERSION="1.9.2"
 
 print_help() {
-    echo "Usage: bash goinstall.sh --64 --zsh"
+    echo "Usage: bash goinstall.sh OPTIONS"
     echo -e "\nOPTIONS:"
     echo -e "  --32\t\tInstall 32-bit version"
     echo -e "  --64\t\tInstall 64-bit version"
     echo -e "  --arm\t\tInstall armv6 version"
     echo -e "  --darwin\tInstall darwin version"
-    echo -e "  --zsh\t\tYour shell version"
-    echo -e "  --bash\tYour shell version"
     echo -e "  --remove\tTo remove currently installed version"
 }
 
-shell_versions=("--bash" "--zsh")
-
-if [[ " ${shell_versions[*]} " == *"$2"* && "$2" != "" ]]  ;then
-    prefix="--"
-    shell_profile="${2#$prefix}rc"
-else
+test(){
+    if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
+    # assume Zsh
+    shell_profile="zshrc"
+    elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
+    # assume Bash
     shell_profile="bashrc"
-fi
+    fi
+}
+
 
 if [ "$1" == "--32" ]; then
     DFILE="go$VERSION.linux-386.tar.gz"
@@ -63,7 +63,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "Extracting ..."
+echo "Extracting File..."
 tar -C "$HOME" -xzf /tmp/go.tar.gz
 mv "$HOME/go" "$HOME/.go"
 touch "$HOME/.${shell_profile}"
