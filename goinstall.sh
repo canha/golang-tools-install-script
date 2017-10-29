@@ -31,7 +31,6 @@ elif [ "$1" == "--darwin" ]; then
     DFILE="go$VERSION.darwin-amd64.tar.gz"
 elif [ "$1" == "--remove" ]; then
     rm -rf "$HOME/.go/"
-    rm -rf "$HOME/go/"
     sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
     sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
     sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
@@ -48,7 +47,7 @@ else
 fi
 
 if [ -d "$HOME/.go" ] || [ -d "$HOME/go" ]; then
-    echo "Installation directories already exist. Exiting."
+    echo "The 'go' or '.go' directories already exist. Exiting."
     exit 1
 fi
 
