@@ -28,7 +28,7 @@ bash goinstall.sh --64
 bash goinstall.sh --32
 ```
 
-### To install on macOS
+To install on macOS:
 
 ```shell
 bash goinstall.sh --darwin
