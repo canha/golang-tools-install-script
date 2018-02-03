@@ -1,7 +1,7 @@
 # golang-tools-install-script
 
 Bash script to automate Go language tools single user installation (Linux) or even removal.
-Latest filename for download at the time of this writting was for version 1.9.2 of Go. Feel free to change the variables on the beggining to match whatever version you need.
+Latest filename for download at the time of this writting was for version 1.9.3 of Go. Feel free to change the variables on the beggining to match whatever version you need.
 
 Tested with:
 
