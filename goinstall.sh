@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
-VERSION="1.9.3"
+#VERSION="1.10.1"
+VERSION="$(curl -sL https://golang.org/dl |grep -e 'go1.' | head -1 | sed 's/<[^*]*.go1./go1./g' |awk -F '.' '{print $1"."$2"."$3 }')"
+
+OS_TYPE="$(uname -s)-$(uname -m)"
 
 print_help() {
     echo "Usage: bash goinstall.sh OPTIONS"
@@ -13,38 +16,61 @@ print_help() {
     echo -e "  --remove\tTo remove currently installed version"
 }
 
-if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
+if [[ -n "$($SHELL -c 'echo $ZSH_VERSION')" ]]; then
     # assume Zsh
     shell_profile="zshrc"
-elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
+elif [[ -n "$($SHELL -c 'echo $BASH_VERSION')" ]]; then
     # assume Bash
     shell_profile="bashrc"
 fi
 
-if [ "$1" == "--32" ]; then
-    DFILE="go$VERSION.linux-386.tar.gz"
-elif [ "$1" == "--64" ]; then
-    DFILE="go$VERSION.linux-amd64.tar.gz"
-elif [ "$1" == "--arm" ]; then
-    DFILE="go$VERSION.linux-armv6l.tar.gz"
-elif [ "$1" == "--darwin" ]; then
-    DFILE="go$VERSION.darwin-amd64.tar.gz"
-elif [ "$1" == "--remove" ]; then
-    rm -rf "$HOME/.go/"
-    sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
-    sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
-    sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
-    sed -i '/export GOPATH/d' "$HOME/.${shell_profile}"
-    sed -i '/:$GOPATH/d' "$HOME/.${shell_profile}"
-    echo "Go removed."
-    exit 0
-elif [ "$1" == "--help" ]; then
-    print_help
-    exit 0
-else
-    print_help
-    exit 1
-fi
+	case $OS_TYPE in
+		Linux-x86_64)
+			SYSTEM="linux-amd64" ;;
+		Linux-i686)
+			SYSTEM="linux-386" ;;
+		Darwin-x86_64)
+			SYSTEM="darwin-amd64" ;;
+		*)
+			SYSTEM=""
+			echo " ----------- You need to insert manually as below ----------" 
+			print_help
+			exit 1 ;;
+	esac
+
+
+	if [[ "$1" = "" ]];then
+		DFILE="go$VERSION.$SYSYEM.tar.gz"
+	else
+		case $1 in
+			--32)
+				SYSTEM="linux-386" ;;
+			--64)
+				SYSTEM="linux-amd64" ;;
+			--arm)
+				SYSTEM="linux-armv6l" ;;
+			--darwin)
+				SYSTEM="darwin-amd64" ;;
+			--remove)
+				rm -rf "$HOME/.go/"
+				sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
+				sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
+				sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
+				sed -i '/export GOPATH/d' "$HOME/.${shell_profile}"
+				sed -i '/:$GOPATH/d' "$HOME/.${shell_profile}"
+				echo "Go removed."
+				exit 0 ;;
+			--help)
+				print_help
+				exit 0 ;;
+			*)
+				print_help
+				exit 1 ;;
+		esac
+			DFILE="go$VERSION.$SYSTEM.tar.gz"
+
+	fi
+
 
 if [ -d "$HOME/.go" ] || [ -d "$HOME/go" ]; then
     echo "The 'go' or '.go' directories already exist. Exiting."
