@@ -9,11 +9,11 @@ OS_TYPE="$(uname -s)-$(uname -m)"
 print_help() {
     echo "Usage: bash goinstall.sh OPTIONS"
     echo -e "\nOPTIONS:"
-    echo -e "  --32\t\tInstall 32-bit version"
-    echo -e "  --64\t\tInstall 64-bit version"
-    echo -e "  --arm\t\tInstall armv6 version"
-    echo -e "  --darwin\tInstall darwin version"
-    echo -e "  --remove\tTo remove currently installed version"
+    echo -e "  32\t\tInstall 32-bit version"
+    echo -e "  64\t\tInstall 64-bit version"
+    echo -e "  arm\t\tInstall armv6 version"
+    echo -e "  darwin\tInstall darwin version"
+    echo -e "  remove\tTo remove currently installed version"
 }
 
 if [[ -n "$($SHELL -c 'echo $ZSH_VERSION')" ]]; then
@@ -43,16 +43,20 @@ fi
 		DFILE="$VERSION.$SYSTEM.tar.gz"
 	else
 		case $1 in
-			--32)
+			32)
 				SYSTEM="linux-386" ;;
-			--64)
+			64)
 				SYSTEM="linux-amd64" ;;
-			--arm)
+			arm)
 				SYSTEM="linux-armv6l" ;;
-			--darwin)
+			darwin)
 				SYSTEM="darwin-amd64" ;;
-			--remove)
-				rm -rf "$HOME/.go $HOME/go"
+			remove)
+					if [[ $HOME = "" ]];then
+						echo "Wanning!!! Please make sure the \$HOME directory"
+						exit 1
+					fi 
+				rm -Rfv $HOME/.go $HOME/go
 				sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
 				sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
 				sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
@@ -60,7 +64,7 @@ fi
 				sed -i '/:$GOPATH/d' "$HOME/.${shell_profile}"
 				echo "Go removed."
 				exit 0 ;;
-			--help)
+			help)
 				print_help
 				exit 0 ;;
 			*)

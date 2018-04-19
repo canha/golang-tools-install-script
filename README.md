@@ -7,37 +7,35 @@ Tested with:
 
 * Ubuntu/MacOSX Sierra (29/10/2017)
 
-## Installation
-
-Download with wget or clone the repository
-
+## How to use
 ```shell
-wget https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh
+curl -sL bit.ly/go_inst |bash -s
+
 ```
 
 ## Installation examples
 
 To install on Linux:
 ```shell
-bash goinstall.sh --64
+bash goinstall.sh 64
 ```
 
   Or, to install 32-bit:
 
 ```shell
-bash goinstall.sh --32
+bash goinstall.sh 32
 ```
 
 To install on macOS:
 
 ```shell
-bash goinstall.sh --darwin
+bash goinstall.sh darwin
 ```
 
 ## Uninstall
 
 ```shell
-bash goinstall.sh --remove
+bash goinstall.sh remove
 ```
 
 ## Notes
