@@ -1,45 +1,41 @@
 # golang-tools-install-script
 
 Bash script to automate Go language tools single user installation (Linux) or even removal.
-Latest filename for download at the time of this writting was for version 1.9.3 of Go. Feel free to change the variables on the beggining to match whatever version you need.
+ * Golang version auto-detect function has been added
 
 Tested with:
 
-* Ubuntu/MacOSX Sierra (29/10/2017)
+* Ubuntu/MacOSX Sierra (19/Apr/2018)
 
-## How to use
+## How to use for golang install
 ```shell
-curl -sL bit.ly/go_inst |bash -s
+curl -sL bit.ly/go_inst |bash
 
 ```
 
-## Installation examples
-
-To install on Linux:
+## Installation manually
+To install on Linux 64bit:
 ```shell
-bash goinstall.sh 64
+curl -sL bit.ly/go_inst |bash -s "64"
 ```
-
   Or, to install 32-bit:
 
 ```shell
-bash goinstall.sh 32
+curl -sL bit.ly/go_inst |bash -s "32"
 ```
 
 To install on macOS:
-
 ```shell
-bash goinstall.sh darwin
+curl -sL bit.ly/go_inst |bash -s "darwin"
 ```
 
 ## Uninstall
 
 ```shell
-bash goinstall.sh remove
+curl -sL bit.ly/go_inst |bash -s "remove"
 ```
 
 ## Notes
-
 The script will create `.go` and `go` folders on your home directory, add the needed variables and PATH expansion.
 
 `$HOME/.go folder is your where Go will be installed to.`
