@@ -40,7 +40,7 @@ fi
 
 
 	if [[ "$1" = "" ]];then
-		DFILE="go$VERSION.$SYSYEM.tar.gz"
+		DFILE="$VERSION.$SYSTEM.tar.gz"
 	else
 		case $1 in
 			--32)
@@ -52,7 +52,7 @@ fi
 			--darwin)
 				SYSTEM="darwin-amd64" ;;
 			--remove)
-				rm -rf "$HOME/.go/"
+				rm -rf "$HOME/.go $HOME/go"
 				sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
 				sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
 				sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
@@ -67,7 +67,7 @@ fi
 				print_help
 				exit 1 ;;
 		esac
-			DFILE="go$VERSION.$SYSTEM.tar.gz"
+			DFILE="$VERSION.$SYSTEM.tar.gz"
 
 	fi
 
