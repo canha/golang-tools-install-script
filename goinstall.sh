@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-#VERSION="1.10.1"
+#VERSION="1.10.4"
 VERSION="$(curl -sL https://golang.org/dl |grep -e 'go1.' | head -1 | sed 's/<[^*]*.go1./go1./g' |awk -F '.' '{print $1"."$2"."$3 }')"
 
 OS_TYPE="$(uname -s)-$(uname -m)"
