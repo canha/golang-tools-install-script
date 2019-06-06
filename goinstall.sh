@@ -31,11 +31,11 @@ elif [ "$1" == "--darwin" ]; then
     DFILE="go$VERSION.darwin-amd64.tar.gz"
 elif [ "$1" == "--remove" ]; then
     rm -rf "$HOME/.go/"
-    sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
-    sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
-    sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
-    sed -i '/export GOPATH/d' "$HOME/.${shell_profile}"
-    sed -i '/:$GOPATH/d' "$HOME/.${shell_profile}"
+    sed -i "" '/# GoLang/d' "$HOME/.${shell_profile}"
+    sed -i "" '/export GOROOT/d' "$HOME/.${shell_profile}"
+    sed -i "" '/:$GOROOT/d' "$HOME/.${shell_profile}"
+    sed -i "" '/export GOPATH/d' "$HOME/.${shell_profile}"
+    sed -i "" '/:$GOPATH/d' "$HOME/.${shell_profile}"
     echo "Go removed."
     exit 0
 elif [ "$1" == "--help" ]; then
