@@ -55,10 +55,15 @@ bash goinstall.sh --remove
 
 ## Notes
 
-The script will create `.go` and `go` folders on your home directory, add the needed variables and PATH expansion.
+By default the script will create `.go` and `go` folders on your home directory, add the needed variables and PATH expansion.
 
-`$HOME/.go folder is your where Go will be installed to.`
+`$HOME/.go is location where Go will be installed to.`
 
 `$HOME/go is the default workspace.`
 
+In order to install Go to other location and set custom workspace set environment variables `GOROOT` and `GOPATH` before installing (uninstalling) Go tools:
+```shell
+export GOROOT=/opt/go
+export GOPATH=$HOME/projects/go
+```
 Read more about the [workspace](http://golang.org/doc/code.html).
