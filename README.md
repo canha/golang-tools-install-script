@@ -18,6 +18,7 @@ wget https://raw.githubusercontent.com/canha/golang-tools-install-script/master/
 ```
 
 ```shell
+# Useful in macOS, where wget isn't default
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh -O
 ```
 
