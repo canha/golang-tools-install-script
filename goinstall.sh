@@ -66,7 +66,7 @@ if [ "$1" == "--remove" ]; then
 elif [ "$1" == "--help" ]; then
     print_help
     exit 0
-elif [ ! -z "$1" ]
+elif [ ! -z "$1" ]; then
     echo "Unrecognized option: $1"
     exit 1
 fi
