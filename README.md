@@ -6,14 +6,14 @@ Feel free to change the variables on the beggining to match whatever version of 
 
 Tested with:
 
-* Ubuntu 18.04 and later (06/2019)
-* macOS Mojave (06/2019)
+* Ubuntu 18.04 - 19.04 :white_check_mark:
+* macOS Mojave :white_check_mark:
 
-## Requirements
+## :hammer: Requirements
 * `wget` or `curl`
 * Bash shell
 
-## Quick install
+##  :fast_forward: Quick install
 
 Download and run with `wget` or `curl`:
 
@@ -25,7 +25,7 @@ wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 ```
 
-## Uninstall
+##  :no_entry_sign: Uninstall
 
 Pass the `--remove` option into the script:
 ```shell
@@ -35,7 +35,7 @@ wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --remove
 ```
 
-## Notes
+## :pencil: Notes
 
 By default the script will create `.go` and `go` folders on your home directory, add the needed variables and PATH expansion.
 
