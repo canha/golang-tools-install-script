@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VERSION="1.12"
+VERSION="1.12.5"
 
 print_help() {
     echo "Usage: bash goinstall.sh OPTIONS"
@@ -46,8 +46,8 @@ else
     exit 1
 fi
 
-if [ -d "$HOME/.go" ] || [ -d "$HOME/go" ]; then
-    echo "The 'go' or '.go' directories already exist. Exiting."
+if [ -d "$HOME/.go" ]; then
+    echo "The '.go' directory already exists. Exiting."
     exit 1
 fi
 
@@ -60,8 +60,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Extracting File..."
-tar -C "$HOME" -xzf /tmp/go.tar.gz
-mv "$HOME/go" "$HOME/.go"
+tar -C "$HOME/.go" --strip-components=1 -xzf /tmp/go.tar.gz
 touch "$HOME/.${shell_profile}"
 {
     echo '# GoLang'
