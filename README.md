@@ -9,6 +9,10 @@ Tested with:
 * Ubuntu 18.04 and later (06/2019)
 * macOS Mojave (06/2019)
 
+## Requirements
+* wget
+* Bash shell
+
 ## Downloading the script
 
 Download with wget, curl or clone the repository
@@ -18,7 +22,6 @@ wget https://raw.githubusercontent.com/canha/golang-tools-install-script/master/
 ```
 
 ```shell
-# Useful in macOS, where wget isn't default
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh -O
 ```
 
