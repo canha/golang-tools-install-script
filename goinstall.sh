@@ -64,6 +64,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Extracting File..."
+mkdir -p "$HOME/.go/"
 tar -C "$HOME/.go" --strip-components=1 -xzf /tmp/go.tar.gz
 touch "$HOME/.${shell_profile}"
 {
