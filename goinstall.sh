@@ -52,7 +52,11 @@ if [ -d "$HOME/.go" ]; then
 fi
 
 echo "Downloading $DFILE ..."
-wget https://storage.googleapis.com/golang/$DFILE -O /tmp/go.tar.gz
+if hash wget 2>/dev/null; then
+    wget https://storage.googleapis.com/golang/$DFILE -O /tmp/go.tar.gz
+else
+    curl -o /tmp/go.tar.gz https://storage.googleapis.com/golang/$DFILE
+fi
 
 if [ $? -ne 0 ]; then
     echo "Download failed! Exiting."

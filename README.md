@@ -10,7 +10,7 @@ Tested with:
 * macOS Mojave (06/2019)
 
 ## Requirements
-* wget
+* wget or curl
 * Bash shell
 
 ## Downloading the script
