@@ -25,10 +25,10 @@ case $OS in
             ARCH=386
             ;;
         esac
-        platform="linux-$ARCH"
+        PLATFORM="linux-$ARCH"
     ;;
     "Darwin")
-        platform="darwin-amd64"
+        PLATFORM="darwin-amd64"
     ;;
 esac
 
