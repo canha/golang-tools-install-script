@@ -1,0 +1,18 @@
+language: bash
+
+matrix:
+  include:
+    - os: linux
+      dist: bionic
+    - os: linux
+      dist: xenial
+    - os: osx
+    
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update ; sudo apt-get -yqq install shellcheck ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install shellcheck ; fi
+
+install: true
+script:
+- shellcheck ./goinstall.sh || travis_terminate 1
+- ./tests/install.sh
