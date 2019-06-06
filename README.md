@@ -10,47 +10,29 @@ Tested with:
 * macOS Mojave (06/2019)
 
 ## Requirements
-* wget or curl
+* `wget` or `curl`
 * Bash shell
 
-## Downloading the script
+## Quick install
 
-Download with wget, curl or clone the repository
-
-```shell
-wget https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh
-```
+Download and run with `wget` or `curl`:
 
 ```shell
-curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh -O
-```
+# Linux typically has wget installed
+wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 
-```shell
-git clone https://github.com/canha/golang-tools-install-script.git
-```
-## Installation examples
-
-To install on Linux:
-```shell
-bash goinstall.sh --64
-```
-
-  Or, to install 32-bit:
-
-```shell
-bash goinstall.sh --32
-```
-
-To install on macOS:
-
-```shell
-bash goinstall.sh --darwin
+# Curl is generally available on macOS
+curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 ```
 
 ## Uninstall
 
+Pass the `--remove` option into the script:
 ```shell
-bash goinstall.sh --remove
+wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --remove
+
+# Or if using curl
+curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --remove
 ```
 
 ## Notes
