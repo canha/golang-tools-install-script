@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-VERSION="1.9.2"
+VERSION="1.12.5"
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
@@ -34,11 +34,11 @@ elif [ "$1" == "--darwin" ]; then
     DFILE="go$VERSION.darwin-amd64.tar.gz"
 elif [ "$1" == "--remove" ]; then
     rm -rf "$GOROOT"
-    sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
-    sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
-    sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
-    sed -i '/export GOPATH/d' "$HOME/.${shell_profile}"
-    sed -i '/:$GOPATH/d' "$HOME/.${shell_profile}"
+    sed -i "" '/# GoLang/d' "$HOME/.${shell_profile}"
+    sed -i "" '/export GOROOT/d' "$HOME/.${shell_profile}"
+    sed -i "" '/:$GOROOT/d' "$HOME/.${shell_profile}"
+    sed -i "" '/export GOPATH/d' "$HOME/.${shell_profile}"
+    sed -i "" '/:$GOPATH/d' "$HOME/.${shell_profile}"
     echo "Go removed."
     exit 0
 elif [ "$1" == "--help" ]; then
@@ -49,13 +49,17 @@ else
     exit 1
 fi
 
-if [ -d "$GOROOT" ] || [ -d "$GOPATH" ]; then
-    echo "The "$GOROOT" or "$GOPATH" directories already exist. Exiting."
+if [ -d "$HOME/.go" ]; then
+    echo "The '.go' directory already exists. Exiting."
     exit 1
 fi
 
 echo "Downloading $DFILE ..."
-wget https://storage.googleapis.com/golang/$DFILE -O /tmp/go.tar.gz
+if hash wget 2>/dev/null; then
+    wget https://storage.googleapis.com/golang/$DFILE -O /tmp/go.tar.gz
+else
+    curl -o /tmp/go.tar.gz https://storage.googleapis.com/golang/$DFILE
+fi
 
 if [ $? -ne 0 ]; then
     echo "Download failed! Exiting."
@@ -63,8 +67,8 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Extracting File..."
-tar -C /tmp -xzf /tmp/go.tar.gz
-mv /tmp/go "$GOROOT"
+mkdir -p "$HOME/.go/"
+tar -C "$HOME/.go" --strip-components=1 -xzf /tmp/go.tar.gz
 touch "$HOME/.${shell_profile}"
 {
     echo '# GoLang'

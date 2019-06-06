@@ -1,20 +1,33 @@
 # golang-tools-install-script
 
-Bash script to automate Go language tools single user installation (Linux) or even removal.
-Latest filename for download at the time of this writting was for version 1.9.2 of Go. Feel free to change the variables on the beggining to match whatever version you need.
+Bash script to automate Go language tools single user installation or even removal.
+
+Feel free to change the variables on the beggining to match whatever version of Go you need.
 
 Tested with:
 
-* Ubuntu/MacOSX Sierra (29/10/2017)
+* Ubuntu 18.04 and later (06/2019)
+* macOS Mojave (06/2019)
 
-## Installation
+## Requirements
+* wget or curl
+* Bash shell
 
-Download with wget or clone the repository
+## Downloading the script
+
+Download with wget, curl or clone the repository
 
 ```shell
 wget https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh
 ```
 
+```shell
+curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh -O
+```
+
+```shell
+git clone https://github.com/canha/golang-tools-install-script.git
+```
 ## Installation examples
 
 To install on Linux:
