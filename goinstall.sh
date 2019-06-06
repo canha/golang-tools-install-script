@@ -66,8 +66,9 @@ if [ "$1" == "--remove" ]; then
 elif [ "$1" == "--help" ]; then
     print_help
     exit 0
-else
+elif [ ! -z "$1" ]
     echo "Unrecognized option: $1"
+    exit 1
 fi
 
 if [ -d "$HOME/.go" ]; then
