@@ -6,8 +6,8 @@ Feel free to change the variables on the beggining to match whatever version of 
 
 Tested with:
 
-* Ubuntu 18.04 - 19.04 :white_check_mark:
-* macOS Mojave :white_check_mark:
+* Ubuntu 16.04 through 19.04 :white_check_mark:
+* macOS Sierra through Mojave :white_check_mark:
 
 ## :hammer: Requirements
 * `wget` or `curl`
