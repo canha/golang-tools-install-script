@@ -1,6 +1,4 @@
-# golang-tools-install-script
-
-[![Build Status](https://travis-ci.org/canha/golang-tools-install-script.svg?branch=master)](https://travis-ci.org/canha/golang-tools-install-script)
+# golang-tools-install-script [![Build Status](https://travis-ci.org/canha/golang-tools-install-script.svg?branch=master)](https://travis-ci.org/canha/golang-tools-install-script)
 
 Bash script to automate Go language tools single user installation or even removal.
 
@@ -31,10 +29,12 @@ curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/
 
 Pass the `--remove` option into the script:
 ```shell
-wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --remove
+wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh \
+| bash -s -- --remove
 
 # Or if using curl
-curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash -s -- --remove
+curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh \
+| bash -s -- --remove
 ```
 
 ## :pencil: Notes

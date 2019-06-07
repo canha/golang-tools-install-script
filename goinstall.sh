@@ -51,15 +51,15 @@ if [ "$1" == "--remove" ]; then
     if [ "$OS" == "Darwin" ]; then
         sed -i "" '/# GoLang/d' "$HOME/.${shell_profile}"
         sed -i "" '/export GOROOT/d' "$HOME/.${shell_profile}"
-        sed -i "" '/:$GOROOT/d' "$HOME/.${shell_profile}"
+        sed -i "" '/$GOROOT\/bin/d' "$HOME/.${shell_profile}"
         sed -i "" '/export GOPATH/d' "$HOME/.${shell_profile}"
-        sed -i "" '/:$GOPATH/d' "$HOME/.${shell_profile}"
+        sed -i "" '/$GOPATH\/bin/d' "$HOME/.${shell_profile}"
     else
         sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
         sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
-        sed -i '/:$GOROOT/d' "$HOME/.${shell_profile}"
+        sed -i '/$GOROOT\/bin/d' "$HOME/.${shell_profile}"
         sed -i '/export GOPATH/d' "$HOME/.${shell_profile}"
-        sed -i '/:$GOPATH/d' "$HOME/.${shell_profile}"
+        sed -i '/$GOPATH\/bin/d' "$HOME/.${shell_profile}"
     fi
     echo "Go removed."
     exit 0
@@ -71,8 +71,8 @@ elif [ ! -z "$1" ]; then
     exit 1
 fi
 
-if [ -d "$HOME/.go" ]; then
-    echo "The '.go' directory already exists. Exiting."
+if [ -d "$GOROOT" ]; then
+    echo "The Go install directory ($GOROOT) already exists. Exiting."
     exit 1
 fi
 
@@ -89,19 +89,19 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Extracting File..."
-mkdir -p "$HOME/.go/"
-tar -C "$HOME/.go" --strip-components=1 -xzf /tmp/go.tar.gz
+mkdir -p "$GOROOT"
+tar -C "$GOROOT" --strip-components=1 -xzf /tmp/go.tar.gz
 touch "$HOME/.${shell_profile}"
 {
     echo '# GoLang'
     echo "export GOROOT=${GOROOT}"
-    echo 'export PATH=$PATH:$GOROOT/bin'
+    echo 'export PATH=$GOROOT/bin:$PATH'
     echo "export GOPATH=$GOPATH"
-    echo 'export PATH=$PATH:$GOPATH/bin'
+    echo 'export PATH=$GOPATH/bin:$PATH'
 } >> "$HOME/.${shell_profile}"
 
 mkdir -p $GOPATH/{src,pkg,bin}
-echo -e "\nGo $VERSION was installed.\nMake sure to relogin into your shell or run:"
+echo -e "\nGo $VERSION was installed into $GOROOT.\nMake sure to relogin into your shell or run:"
 echo -e "\n\tsource $HOME/.${shell_profile}\n\nto update your environment variables."
 echo "Tip: Opening a new terminal window usually just works. :)"
 rm -f /tmp/go.tar.gz
