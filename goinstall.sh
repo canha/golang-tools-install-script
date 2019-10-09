@@ -47,6 +47,8 @@ fi
 PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
 
 if [ "$1" == "--remove" ]; then
+    GOROOT=$(go env GOROOT)
+    GOPATH=$(go env GOPATH)
     rm -rf "$GOROOT"
     if [ "$OS" == "Darwin" ]; then
         sed -i "" '/# GoLang/d' "$HOME/.${shell_profile}"
