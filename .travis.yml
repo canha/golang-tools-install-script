@@ -14,8 +14,14 @@ matrix:
       osx_image: xcode9.2 # 10.12
 
 install: true
+env: REQVER=1.12
 script: >-
   bash tests/install.sh &&
   source ~/.bashrc &&
   bash tests/validate.sh &&
+  bash tests/remove.sh
+  
+  bash tests/version.sh &&
+  source ~/.bashrc &&
+  bash tests/version-validate.sh &&
   bash tests/remove.sh
