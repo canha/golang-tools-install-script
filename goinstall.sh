@@ -68,7 +68,6 @@ elif [ "$1" == "--help" ]; then
 elif [ "$1" == "--version" ]; then
     if [ -z "$2" ]; then # Check if --version has a second positional parameter
         echo "Please provide a version number for: $1"
-        
     else
         VERSION=$2
 fi
