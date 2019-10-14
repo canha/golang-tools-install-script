@@ -3,9 +3,6 @@ set -e
 
 VERSION="1.13"
 
-[ -z "$GOROOT" ] && GOROOT="$HOME/.go"
-[ -z "$GOPATH" ] && GOPATH="$HOME/go"
-
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
@@ -47,9 +44,12 @@ fi
 PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
 
 if [ "$1" == "--remove" ]; then
-    GOROOT=$(go env GOROOT)
+    # Try $GOROOT var, then if go is in PATH, execute go env GOROOT to get configured value, otherwise will be empty
+    GOROOT=$( [ ! -z "$GOROOT" ] && echo \"$GOROOT\" || ( command -v go > /dev/null && go env GOROOT) )
     GOPATH=$(go env GOPATH)
-    rm -rf "$GOROOT"
+    if [ ! -z "$GOROOT" ]; then
+        rm -rf "$GOROOT"
+    fi
     if [ "$OS" == "Darwin" ]; then
         sed -i "" '/# GoLang/d' "$HOME/.${shell_profile}"
         sed -i "" '/export GOROOT/d' "$HOME/.${shell_profile}"
@@ -72,6 +72,9 @@ elif [ ! -z "$1" ]; then
     echo "Unrecognized option: $1"
     exit 1
 fi
+
+[ -z "$GOROOT" ] && GOROOT="$HOME/.go"
+[ -z "$GOPATH" ] && GOPATH="$HOME/go"
 
 if [ -d "$GOROOT" ]; then
     echo "The Go install directory ($GOROOT) already exists. Exiting."
