@@ -25,7 +25,7 @@ popd
 
 GOVER=`go version`
 
-echo "Testing to make sure that Go $REQVER is installed\n"
+echo "Testing to make sure that Go $REQVER is installed"
 
 if grep -q "$REQVER" <<< "$GOVER"; then
 	echo "Version contains: $REQVER"
