@@ -36,6 +36,7 @@ print_help() {
     echo "Usage: bash goinstall.sh OPTIONS"
     echo -e "\nOPTIONS:"
     echo -e "  --remove\tRemove currently installed version"
+    echo -e "  --version\tSpecify a version number to install"
 }
 
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
@@ -43,8 +44,6 @@ if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
 elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
     shell_profile="bashrc"
 fi
-
-PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
 
 if [ "$1" == "--remove" ]; then
     rm -rf "$GOROOT"
@@ -66,6 +65,12 @@ if [ "$1" == "--remove" ]; then
 elif [ "$1" == "--help" ]; then
     print_help
     exit 0
+elif [ "$1" == "--version" ]; then
+    if [ -z "$2" ]; then # Check if --version has a second positional parameter
+        echo "Please provide a version number for: $1"
+    else
+        VERSION=$2
+    fi
 elif [ ! -z "$1" ]; then
     echo "Unrecognized option: $1"
     exit 1
@@ -75,6 +80,8 @@ if [ -d "$GOROOT" ]; then
     echo "The Go install directory ($GOROOT) already exists. Exiting."
     exit 1
 fi
+
+PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
 
 echo "Downloading $PACKAGE_NAME ..."
 if hash wget 2>/dev/null; then
