@@ -25,6 +25,21 @@ wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 ```
 
+## :package: Version
+
+Pass the `--version` option into the script including the version that you wish to install. This specify a different version without needing to change the variable in the script.
+
+##### Example:
+
+```shell
+wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh \
+| bash -s -- --version 1.13.2
+
+# or...
+curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh \
+| bash -s -- --version 1.13.2
+```
+
 ## :no_entry_sign: Uninstall
 
 Pass the `--remove` option into the script:
