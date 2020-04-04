@@ -40,25 +40,46 @@ print_help() {
 }
 
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
-    shell_profile="zshrc"
+    shell_profile="$HOME/.zshrc"
 elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
-    shell_profile="bashrc"
+    shell_profile="$HOME/.bashrc"
+elif [ -n "`$SHELL -c 'echo $FISH_VERSION'`" ]; then
+    shell="fish"
+    if [ -d "$XDG_CONFIG_HOME" ]; then
+        shell_profile="$XDG_CONFIG_HOME/fish/config.fish"
+    else
+        shell_profile="$HOME/.config/fish/config.fish"
+    fi
 fi
 
 if [ "$1" == "--remove" ]; then
     rm -rf "$GOROOT"
     if [ "$OS" == "Darwin" ]; then
-        sed -i "" '/# GoLang/d' "$HOME/.${shell_profile}"
-        sed -i "" '/export GOROOT/d' "$HOME/.${shell_profile}"
-        sed -i "" '/$GOROOT\/bin/d' "$HOME/.${shell_profile}"
-        sed -i "" '/export GOPATH/d' "$HOME/.${shell_profile}"
-        sed -i "" '/$GOPATH\/bin/d' "$HOME/.${shell_profile}"
+        if [ "$shell" == "fish" ]; then
+            sed -i "" '/# GoLang/d' "$shell_profile"
+            sed -i "" '/set GOROOT/d' "$shell_profile"
+            sed -i "" '/set GOPATH/d' "$shell_profile"
+            sed -i "" '/set PATH $GOPATH\/bin $GOROOT\/bin $PATH/d' "$shell_profile"
+        else
+            sed -i "" '/# GoLang/d' "$shell_profile"
+            sed -i "" '/export GOROOT/d' "$shell_profile"
+            sed -i "" '/$GOROOT\/bin/d' "$shell_profile"
+            sed -i "" '/export GOPATH/d' "$shell_profile"
+            sed -i "" '/$GOPATH\/bin/d' "$shell_profile"
+        fi
     else
-        sed -i '/# GoLang/d' "$HOME/.${shell_profile}"
-        sed -i '/export GOROOT/d' "$HOME/.${shell_profile}"
-        sed -i '/$GOROOT\/bin/d' "$HOME/.${shell_profile}"
-        sed -i '/export GOPATH/d' "$HOME/.${shell_profile}"
-        sed -i '/$GOPATH\/bin/d' "$HOME/.${shell_profile}"
+        if [ "$shell" == "fish" ]; then
+            sed -i '/# GoLang/d' "$shell_profile"
+            sed -i '/set GOROOT/d' "$shell_profile"
+            sed -i '/set GOPATH/d' "$shell_profile"
+            sed -i '/set PATH $GOPATH\/bin $GOROOT\/bin $PATH/d' "$shell_profile"
+        else
+            sed -i '/# GoLang/d' "$shell_profile"
+            sed -i '/export GOROOT/d' "$shell_profile"
+            sed -i '/$GOROOT\/bin/d' "$shell_profile"
+            sed -i '/export GOPATH/d' "$shell_profile"
+            sed -i '/$GOPATH\/bin/d' "$shell_profile"
+        fi
     fi
     echo "Go removed."
     exit 0
@@ -98,17 +119,27 @@ fi
 echo "Extracting File..."
 mkdir -p "$GOROOT"
 tar -C "$GOROOT" --strip-components=1 -xzf /tmp/go.tar.gz
-touch "$HOME/.${shell_profile}"
-{
-    echo '# GoLang'
-    echo "export GOROOT=${GOROOT}"
-    echo 'export PATH=$GOROOT/bin:$PATH'
-    echo "export GOPATH=$GOPATH"
-    echo 'export PATH=$GOPATH/bin:$PATH'
-} >> "$HOME/.${shell_profile}"
+touch "$shell_profile"
+
+if [ "$shell" == "fish" ]; then
+    {
+        echo '# GoLang'
+        echo "set GOROOT '${GOROOT}'"
+        echo "set GOPATH '$GOPATH'"
+        echo 'set PATH $GOPATH/bin $GOROOT/bin $PATH'
+    } >> "$shell_profile"
+else
+    {
+        echo '# GoLang'
+        echo "export GOROOT=${GOROOT}"
+        echo 'export PATH=$GOROOT/bin:$PATH'
+        echo "export GOPATH=$GOPATH"
+        echo 'export PATH=$GOPATH/bin:$PATH'
+    } >> "$shell_profile"
+fi
 
 mkdir -p $GOPATH/{src,pkg,bin}
 echo -e "\nGo $VERSION was installed into $GOROOT.\nMake sure to relogin into your shell or run:"
-echo -e "\n\tsource $HOME/.${shell_profile}\n\nto update your environment variables."
+echo -e "\n\tsource $shell_profile\n\nto update your environment variables."
 echo "Tip: Opening a new terminal window usually just works. :)"
 rm -f /tmp/go.tar.gz
