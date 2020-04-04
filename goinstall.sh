@@ -82,7 +82,7 @@ if [ -d "$GOROOT" ]; then
 fi
 
 PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
-TEMP_DIRECTORY=$(mktemp)
+TEMP_DIRECTORY=$(mktemp -d)
 
 echo "Downloading $PACKAGE_NAME ..."
 if hash wget 2>/dev/null; then
