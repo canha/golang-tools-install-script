@@ -103,12 +103,13 @@ if [ -d "$GOROOT" ]; then
 fi
 
 PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
+TEMP_DIRECTORY=$(mktemp -d)
 
 echo "Downloading $PACKAGE_NAME ..."
 if hash wget 2>/dev/null; then
-    wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O /tmp/go.tar.gz
+    wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
 else
-    curl -o /tmp/go.tar.gz https://storage.googleapis.com/golang/$PACKAGE_NAME
+    curl -o "$TEMP_DIRECTORY/go.tar.gz" https://storage.googleapis.com/golang/$PACKAGE_NAME
 fi
 
 if [ $? -ne 0 ]; then
@@ -118,7 +119,8 @@ fi
 
 echo "Extracting File..."
 mkdir -p "$GOROOT"
-tar -C "$GOROOT" --strip-components=1 -xzf /tmp/go.tar.gz
+
+tar -C "$GOROOT" --strip-components=1 -xzf "$TEMP_DIRECTORY/go.tar.gz"
 touch "$shell_profile"
 
 if [ "$shell" == "fish" ]; then
@@ -142,4 +144,4 @@ mkdir -p $GOPATH/{src,pkg,bin}
 echo -e "\nGo $VERSION was installed into $GOROOT.\nMake sure to relogin into your shell or run:"
 echo -e "\n\tsource $shell_profile\n\nto update your environment variables."
 echo "Tip: Opening a new terminal window usually just works. :)"
-rm -f /tmp/go.tar.gz
+rm -f "$TEMP_DIRECTORY/go.tar.gz"
