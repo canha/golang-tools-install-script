@@ -22,7 +22,7 @@ Download and run with `wget` or `curl`:
 wget -q -O - https://git.io/vQhTU | bash
 
 # macOS typically has curl installed
-curl https://git.io/vQhTU | bash
+curl -L https://git.io/vQhTU | bash
 ```
 
 ## :package: Version
@@ -35,7 +35,7 @@ Pass the `--version` option into the script including the version that you wish 
 wget -q -O - https://git.io/vQhTU | bash -s -- --version 1.13.2
 
 # or...
-curl https://git.io/vQhTU | bash -s -- --version 1.13.2
+curl -L https://git.io/vQhTU | bash -s -- --version 1.13.2
 ```
 
 ## :no_entry_sign: Uninstall
@@ -46,7 +46,7 @@ Pass the `--remove` option into the script:
 wget -q -O - https://git.io/vQhTU | bash -s -- --remove
 
 # or...
-curl https://git.io/vQhTU | bash -s -- --remove
+curl -L https://git.io/vQhTU | bash -s -- --remove
 ```
 
 ## :pencil: Notes
