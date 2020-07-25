@@ -4,10 +4,10 @@ Bash script to automate installation and removal of single user Go language tool
 
 Feel free to change the variables on the beginning to match whatever version of Go you need.
 
-Works for:
+Tested working on:
 
-* :white_check_mark: Ubuntu 16.04 and above 
-* :white_check_mark: macOS Sierra and above 
+* :white_check_mark: Ubuntu 16.04 to 18.04
+* :white_check_mark: macOS Sierra (10.12) to Catalina (10.15)
 
 ## :hammer: Requirements
 * `wget` or `curl`

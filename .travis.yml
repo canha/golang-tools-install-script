@@ -3,18 +3,20 @@ language: bash
 matrix:
   include:
     - os: linux
-      dist: bionic
+      dist: bionic # 18.04 (EOL @ April 2023)
     - os: linux
-      dist: xenial
+      dist: xenial # 16.04 (EOL @ April 2021)
     - os: osx
-      osx_image: xcode10.2 # 10.14
+      osx_image: xcode12 # 10.15.5
+    - os: osx
+      osx_image: xcode11.3 # 10.14.6
     - os: osx
       osx_image: xcode10.1 # 10.13
     - os: osx
       osx_image: xcode9.2 # 10.12
 
 install: true
-env: REQVER=1.12
+env: REQVER=1.14.6
 script: >-
   bash tests/install.sh &&
   source ~/.bashrc &&
