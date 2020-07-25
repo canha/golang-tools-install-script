@@ -15,7 +15,7 @@ Tested working on:
 
 ## :fast_forward: Install
 
-Download and run with `wget` or `curl`:
+Download and run with `wget` or `curl`, here's the short version using the official git.io shortening:
 
 ```shell
 # Linux typically has wget installed
@@ -23,6 +23,14 @@ wget -q -O - https://git.io/vQhTU | bash
 
 # macOS typically has curl installed
 curl -L https://git.io/vQhTU | bash
+```
+
+Or, if you are more comfortable with the raw URL:
+```shell
+wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
+
+# or...
+curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 ```
 
 ## :package: Version
