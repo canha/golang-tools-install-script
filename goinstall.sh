@@ -42,6 +42,11 @@ print_help() {
     echo -e "  --version\tSpecify a version number to install"
 }
 
+if [ -z "$PLATFORM" ]; then
+    echo "Your operating system is not supported by the script."
+    exit 1
+fi
+
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
     shell_profile="$HOME/.zshrc"
 elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
