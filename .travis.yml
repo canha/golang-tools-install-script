@@ -1,15 +1,19 @@
 language: bash
 
-arch:
-  - amd64
-  - arm64
-
 matrix:
   include:
     - os: linux
       dist: bionic # 18.04 (EOL @ April 2023)
+      arch: amd64
+    - os: linux
+      dist: bionic # 18.04 (EOL @ April 2023)
+      arch: arm64
     - os: linux
       dist: xenial # 16.04 (EOL @ April 2021)
+      arch: amd64
+    - os: linux
+      dist: xenial # 16.04 (EOL @ April 2021)
+      arch: arm64
     - os: osx
       osx_image: xcode12 # 10.15.5
     - os: osx
