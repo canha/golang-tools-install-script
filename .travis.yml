@@ -1,5 +1,9 @@
 language: bash
 
+arch:
+  - amd64
+  - arm64
+
 matrix:
   include:
     - os: linux
