@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2016
 set -e
 
 VERSION="1.14.6"
@@ -8,6 +9,7 @@ VERSION="1.14.6"
 
 OS="$(uname -s)"
 ARCH="$(uname -m)"
+
 
 case $OS in
     "Linux")
@@ -47,11 +49,11 @@ if [ -z "$PLATFORM" ]; then
     exit 1
 fi
 
-if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
+if [ -n "$($SHELL -c 'echo $ZSH_VERSION')" ]; then
     shell_profile="$HOME/.zshrc"
-elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
+elif [ -n "$($SHELL -c 'echo $BASH_VERSION')" ]; then
     shell_profile="$HOME/.bashrc"
-elif [ -n "`$SHELL -c 'echo $FISH_VERSION'`" ]; then
+elif [ -n "$($SHELL -c 'echo $FISH_VERSION')" ]; then
     shell="fish"
     if [ -d "$XDG_CONFIG_HOME" ]; then
         shell_profile="$XDG_CONFIG_HOME/fish/config.fish"
@@ -148,7 +150,7 @@ else
     } >> "$shell_profile"
 fi
 
-mkdir -p $GOPATH/{src,pkg,bin}
+mkdir -p "${GOPATH}/"{src,pkg,bin}
 echo -e "\nGo $VERSION was installed into $GOROOT.\nMake sure to relogin into your shell or run:"
 echo -e "\n\tsource $shell_profile\n\nto update your environment variables."
 echo "Tip: Opening a new terminal window usually just works. :)"

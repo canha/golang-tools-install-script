@@ -23,7 +23,7 @@ script: >-
   bash tests/validate.sh &&
   bash tests/remove.sh
   
-  bash tests/version.sh &&
+  bash tests/install-custom-version.sh &&
   source ~/.bashrc &&
-  bash tests/version-validate.sh &&
+  bash tests/custom-version-validate.sh &&
   bash tests/remove.sh
