@@ -18,6 +18,8 @@ matrix:
 install: true
 env: REQVER=1.14.6
 script: >-
+  bash prereqs.sh
+  
   bash tests/install.sh &&
   source ~/.bashrc &&
   bash tests/validate.sh &&

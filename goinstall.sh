@@ -10,7 +10,6 @@ VERSION="1.14.6"
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
-
 case $OS in
     "Linux")
         case $ARCH in
