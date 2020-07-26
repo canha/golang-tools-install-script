@@ -10,8 +10,7 @@ Tested working on:
 * :white_check_mark: macOS Sierra (10.12) to Catalina (10.15)
 
 Supported shells:
-* Bash
-* fish
+* Bash, fish, Zsh
 
 ## :hammer: Requirements
 * `wget` or `curl`
