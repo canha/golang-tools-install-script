@@ -130,8 +130,9 @@ echo "Extracting File..."
 mkdir -p "$GOROOT"
 
 tar -C "$GOROOT" --strip-components=1 -xzf "$TEMP_DIRECTORY/go.tar.gz"
-touch "$shell_profile"
 
+echo "Configuring shell profile in: $shell_profile"
+touch "$shell_profile"
 if [ "$shell" == "fish" ]; then
     {
         echo '# GoLang'

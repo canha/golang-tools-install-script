@@ -29,3 +29,5 @@ script: >-
   source ~/.bashrc &&
   bash tests/custom-version-validate.sh &&
   bash tests/remove.sh
+
+  SHELL=$(which fish) bash tests/install.sh
