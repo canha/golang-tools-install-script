@@ -36,7 +36,7 @@ wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 ```
 
-## :package: Custom Go version
+## :package: Install a custom Go version
 
 Pass the `--version` option into the script including the version that you wish to install.
 
