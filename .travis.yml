@@ -17,9 +17,16 @@ matrix:
 
 install: true
 env: REQVER=1.14.6
+
+addons:
+  homebrew:
+    packages:
+    - fish
+  apt:
+    packages:
+    - fish
+
 script: >-
-  bash tests/prereqs.sh
-  
   bash tests/install.sh &&
   source ~/.bashrc &&
   bash tests/validate.sh &&
