@@ -22,6 +22,7 @@ addons:
   homebrew:
     packages:
     - fish
+    update: true
   apt:
     packages:
     - fish
