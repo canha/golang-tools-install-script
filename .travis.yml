@@ -39,5 +39,4 @@ script: >-
   bash tests/custom-version-validate.sh &&
   bash tests/remove.sh
 
-  export SHELL=$(which fish)
-  bash tests/install.sh
+  SHELL=$(which fish) bash tests/install.sh
