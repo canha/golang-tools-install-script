@@ -2,7 +2,7 @@
 # shellcheck disable=SC2016
 set -e
 
-VERSION="1.15.4"
+VERSION="1.15.6"
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
