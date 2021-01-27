@@ -22,6 +22,9 @@ case $OS in
         "armv6")
             ARCH=armv6l
             ;;
+        "armv7l")
+            ARCH=armv6l
+            ;;
         "armv8")
             ARCH=arm64
             ;;
