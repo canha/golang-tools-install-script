@@ -1,0 +1,37 @@
+name: Update Go Version
+
+on:
+  push:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  check_version:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout actions
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: python -m pip install --upgrade requests
+
+    - name: check-version
+      #env:
+      #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        VERSION=`python tests/version.py`
+        echo Latest: ${VERSION}
+        sed -i "s/VERSION=\"1.16\"/VERSION=\"${VERSION}\"/g" goinstall.sh
+        if [ -n "$(git status --porcelain)" ]; then
+            git config --global user.name 'Actions'
+            git config --global user.email 'Actions@users.noreply.github.com'
+            git commit -am "Update Go version by actions."
+            git push
+        fi
