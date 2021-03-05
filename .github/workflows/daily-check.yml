@@ -1,4 +1,4 @@
-name: Check Go Version
+name: Go Version
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  check_version:
+  check:
 
     runs-on: ubuntu-latest
 
