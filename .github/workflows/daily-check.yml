@@ -32,6 +32,6 @@ jobs:
         if [ -n "$(git status --porcelain)" ]; then
             git config --global user.name 'Actions'
             git config --global user.email 'Actions@users.noreply.github.com'
-            git commit -am "Update Go version by actions."
+            git commit -am "Update Go version by Actions."
             git push
         fi
