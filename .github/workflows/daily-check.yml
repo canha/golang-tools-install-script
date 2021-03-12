@@ -28,7 +28,7 @@ jobs:
       run: |
         VERSION=`python tests/version.py`
         echo Latest: ${VERSION}
-        sed -i "s/VERSION=\".*?\"/VERSION=\"${VERSION}\"/g" goinstall.sh
+        sed -i "s/VERSION=\".*\?\"/VERSION=\"${VERSION}\"/g" goinstall.sh
         if [ -n "$(git status --porcelain)" ]; then
             git config --global user.name 'Actions'
             git config --global user.email 'Actions@users.noreply.github.com'
