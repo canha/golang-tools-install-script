@@ -3,18 +3,17 @@ language: bash
 matrix:
   include:
     - os: linux
-      dist: bionic # 18.04 (EOL @ April 2023)
+      dist: focal # 20.04
     - os: linux
-      dist: xenial # 16.04 (EOL @ April 2021)
+      dist: bionic # 18.04 (EOL @ April 2023)
     - os: osx
-      osx_image: xcode12 # 10.15.5
+      osx_image: xcode12.5 # 11.3
     - os: osx
-      osx_image: xcode11.3 # 10.14.6
-    - os: osx
-      osx_image: xcode10.1 # 10.13
+      osx_image: xcode12.2 # 10.15.7
+
 
 install: true
-env: REQVER=1.14.6
+env: REQVER=1.16.7
 
 addons:
   homebrew:
