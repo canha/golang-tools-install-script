@@ -1,11 +1,9 @@
 #!/bin/bash
 set -e
-echo "Go environment after setup:"
-env | grep "^GO"
 
-mkdir -p "$GOPATH/src/hello"
-pushd "$GOPATH/src/hello"
-echo "Writing hello.go"
+mkdir -p "/tmp/validate-go"
+pushd "/tmp/validate-go"
+go mod init example.com/user/hello
 cat >hello.go <<EOF
 package main
 
@@ -20,8 +18,6 @@ func main() {
 EOF
 echo "Building hello test project"
 go build
-echo "Install hello test project"
-go install
 echo "Run hello test project"
-hello
+./hello
 popd
