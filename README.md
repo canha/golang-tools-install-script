@@ -6,8 +6,8 @@ Feel free to change the variables on the beginning to match whatever version of 
 
 Tested working on:
 
-* :white_check_mark: Ubuntu 16.04 to 18.04
-* :white_check_mark: macOS Sierra (10.12) to Catalina (10.15)
+* :white_check_mark: Ubuntu 16.04 to 20.04
+* :white_check_mark: macOS Sierra (10.12) to Big Sur (11.3)
 
 Supported shells:
 * Bash, fish, Zsh
