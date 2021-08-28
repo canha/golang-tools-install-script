@@ -3,6 +3,9 @@ language: bash
 matrix:
   include:
     - os: linux
+      arch: 
+        - amd64
+        - arm64
       dist: focal # 20.04
     - os: linux
       dist: bionic # 18.04 (EOL @ April 2023)
