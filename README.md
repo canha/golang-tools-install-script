@@ -1,6 +1,6 @@
 # golang-tools-install-script
 
-Bash script to automate installation and removal of single user Go language tools.
+Bash script to automate installation and removal of single-user Go language tools.
 
 Feel free to change the variables on the beginning to match whatever version of Go you need.
 
