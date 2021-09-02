@@ -1,4 +1,4 @@
-# golang-tools-install-script [![Build Status](https://app.travis-ci.com/canha/golang-tools-install-script.svg?branch=master)](https://app.travis-ci.com/canha/golang-tools-install-script)
+# golang-tools-install-script
 
 Bash script to automate installation and removal of single user Go language tools.
 
