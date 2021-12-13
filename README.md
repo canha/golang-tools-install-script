@@ -36,6 +36,22 @@ wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script
 curl https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
 ```
 
+## :dvd: Downloads the installation package from the specified mirror URL
+
+Pass the `--mirror` option into the script including the mirror URL that you wish to download from, and you can also append `--version` option.
+
+##### Example:
+
+```shell
+wget -q -O - https://git.io/vQhTU | bash -s -- --mirror https://mirrors.ustc.edu.cn/golang
+
+# or...
+curl -L https://git.io/vQhTU | bash -s -- --mirror https://mirrors.ustc.edu.cn/golang
+
+# and use custom version...
+curl -L https://git.io/vQhTU | bash -s -- --mirror https://mirrors.ustc.edu.cn/golang --version 1.13.2
+```
+
 ## :package: Install a custom Go version
 
 Pass the `--version` option into the script including the version that you wish to install.

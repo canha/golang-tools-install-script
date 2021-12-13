@@ -3,6 +3,7 @@
 set -e
 
 VERSION="1.17.3"
+MIRROR="https://storage.googleapis.com/golang"
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
@@ -40,7 +41,8 @@ print_help() {
     echo "Usage: bash goinstall.sh OPTIONS"
     echo -e "\nOPTIONS:"
     echo -e "  --remove\tRemove currently installed version"
-    echo -e "  --version\tSpecify a version number to install"
+    echo -e "  --mirror\tProvides a mirror URL for the installer to download"
+    echo -e "  --version\tSpecify a version number to install, Can be appended to the --mirror parameter"
 }
 
 if [ -z "$PLATFORM" ]; then
@@ -101,6 +103,19 @@ elif [ "$1" == "--version" ]; then
     else
         VERSION=$2
     fi
+elif [ "$1" == "--mirror" ]; then
+    if [ -z "$2" ];then
+        echo "Please provide a mirror URL for: $1"
+    else 
+        MIRROR=$2
+    fi
+    if [ "$3" == "--version" ]; then
+        if [ -z "$4" ]; then # Check if --version has a second positional parameter
+            echo "Please provide a version number for: $4"
+        else
+            VERSION=$4
+        fi
+    fi
 elif [ ! -z "$1" ]; then
     echo "Unrecognized option: $1"
     exit 1
@@ -114,11 +129,11 @@ fi
 PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
 TEMP_DIRECTORY=$(mktemp -d)
 
-echo "Downloading $PACKAGE_NAME ..."
+echo "Downloading $MIRROR/$PACKAGE_NAME ..."
 if hash wget 2>/dev/null; then
-    wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
+    wget $MIRROR/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
 else
-    curl -o "$TEMP_DIRECTORY/go.tar.gz" https://storage.googleapis.com/golang/$PACKAGE_NAME
+    curl -o "$TEMP_DIRECTORY/go.tar.gz" $MIRROR/$PACKAGE_NAME
 fi
 
 if [ $? -ne 0 ]; then
