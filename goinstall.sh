@@ -2,7 +2,8 @@
 # shellcheck disable=SC2016
 set -e
 
-VERSION="1.17.3"
+RESPONSE_BODY=$(curl -s -w "\n%{http_code}" https://go.dev/VERSION\?m=text)
+VERSION=$(echo "$RESPONSE_BODY" | sed -E 's/[0-9]{3}$//')
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
