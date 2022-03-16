@@ -32,7 +32,15 @@ case $OS in
         PLATFORM="linux-$ARCH"
     ;;
     "Darwin")
-        PLATFORM="darwin-amd64"
+          case $ARCH in
+          "x86_64")
+              ARCH=amd64
+              ;;
+          "arm64")
+              ARCH=arm64
+              ;;
+          esac
+        PLATFORM="darwin-$ARCH"
     ;;
 esac
 
