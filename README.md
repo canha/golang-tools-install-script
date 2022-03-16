@@ -43,10 +43,10 @@ Pass the `--version` option into the script including the version that you wish 
 ##### Example:
 
 ```shell
-wget -q -O - https://git.io/vQhTU | bash -s -- --version 1.13.2
+wget -q -O - https://git.io/vQhTU | bash -s -- --version 1.18
 
 # or...
-curl -L https://git.io/vQhTU | bash -s -- --version 1.13.2
+curl -L https://git.io/vQhTU | bash -s -- --version 1.18
 ```
 
 ## :no_entry_sign: Uninstall
