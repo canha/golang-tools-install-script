@@ -3,6 +3,7 @@
 set -e
 
 VERSION="1.18.1"
+WRITE_PROFILE=true
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
@@ -49,6 +50,7 @@ print_help() {
     echo -e "\nOPTIONS:"
     echo -e "  --remove\tRemove currently installed version"
     echo -e "  --version\tSpecify a version number to install"
+    echo -e "  --no-profile\tInstall golang without change shell profile"
 }
 
 if [ -z "$PLATFORM" ]; then
@@ -109,6 +111,8 @@ elif [ "$1" == "--version" ]; then
     else
         VERSION=$2
     fi
+elif [ "$1" == "--no-profile" ]; then
+    WRITE_PROFILE=false
 elif [ ! -z "$1" ]; then
     echo "Unrecognized option: $1"
     exit 1
@@ -139,23 +143,26 @@ mkdir -p "$GOROOT"
 
 tar -C "$GOROOT" --strip-components=1 -xzf "$TEMP_DIRECTORY/go.tar.gz"
 
-echo "Configuring shell profile in: $shell_profile"
-touch "$shell_profile"
-if [ "$shell" == "fish" ]; then
-    {
-        echo '# GoLang'
-        echo "set GOROOT '${GOROOT}'"
-        echo "set GOPATH '$GOPATH'"
-        echo 'set PATH $GOPATH/bin $GOROOT/bin $PATH'
-    } >> "$shell_profile"
-else
-    {
-        echo '# GoLang'
-        echo "export GOROOT=${GOROOT}"
-        echo 'export PATH=$GOROOT/bin:$PATH'
-        echo "export GOPATH=$GOPATH"
-        echo 'export PATH=$GOPATH/bin:$PATH'
-    } >> "$shell_profile"
+
+if [ "$WRITE_PROFILE" = true ]; then
+    echo "Configuring shell profile in: $shell_profile"
+    touch "$shell_profile"
+    if [ "$shell" == "fish" ]; then
+        {
+            echo '# GoLang'
+            echo "set GOROOT '${GOROOT}'"
+            echo "set GOPATH '$GOPATH'"
+            echo 'set PATH $GOPATH/bin $GOROOT/bin $PATH'
+        } >> "$shell_profile"
+    else
+        {
+            echo '# GoLang'
+            echo "export GOROOT=${GOROOT}"
+            echo 'export PATH=$GOROOT/bin:$PATH'
+            echo "export GOPATH=$GOPATH"
+            echo 'export PATH=$GOPATH/bin:$PATH'
+        } >> "$shell_profile"
+    fi
 fi
 
 mkdir -p "${GOPATH}/"{src,pkg,bin}
