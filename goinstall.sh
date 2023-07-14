@@ -143,14 +143,14 @@ echo "Configuring shell profile in: $shell_profile"
 touch "$shell_profile"
 if [ "$shell" == "fish" ]; then
     {
-        echo '# GoLang'
+        echo -e '\n# GoLang'
         echo "set GOROOT '${GOROOT}'"
         echo "set GOPATH '$GOPATH'"
         echo 'set PATH $GOPATH/bin $GOROOT/bin $PATH'
     } >> "$shell_profile"
 else
     {
-        echo '# GoLang'
+        echo -e '\n# GoLang'
         echo "export GOROOT=${GOROOT}"
         echo 'export PATH=$GOROOT/bin:$PATH'
         echo "export GOPATH=$GOPATH"
