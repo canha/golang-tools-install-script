@@ -25,6 +25,9 @@ case $OS in
         "armv8")
             ARCH=arm64
             ;;
+        "i686")
+            ARCH=386
+            ;;
         .*386.*)
             ARCH=386
             ;;
