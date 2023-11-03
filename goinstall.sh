@@ -2,7 +2,16 @@
 # shellcheck disable=SC2016
 set -e
 
-VERSION="1.20.6"
+TEMP_DIRECTORY=$(mktemp -d)
+TEMP=${TEMP_DIRECTORY}"/go-page.html"
+curl -k "https://go.dev/dl/" -o $TEMP -s
+
+HTML_TAG_VERSION=$(grep -i -o '<span>go.*</span>' $TEMP | sed -n '6p')
+TAG_VERSION=${HTML_TAG_VERSION:8}
+GO_LATEST_VERSION=${TAG_VERSION%<*}
+
+VERSION=$GO_LATEST_VERSION
+rm -f "$TEMP_DIRECTORY/go-page.html"
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
@@ -123,7 +132,6 @@ if [ -d "$GOROOT" ]; then
 fi
 
 PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
-TEMP_DIRECTORY=$(mktemp -d)
 
 echo "Downloading $PACKAGE_NAME ..."
 if hash wget 2>/dev/null; then
