@@ -1,8 +1,16 @@
 #!/bin/bash
 # shellcheck disable=SC2016
 set -e
+TEMP="/tmp/golang-install-page.html"
 
-VERSION="1.20.6"
+curl -k "https://go.dev/dl/" -o $TEMP -s
+
+HTML_TAG_VERSION=$(grep -i -o '<span>go.*</span>' $TEMP | sed -n '6p')
+TAG_VERSION=${HTML_TAG_VERSION:8}
+GO_LATEST_VERSION=${TAG_VERSION%<*}
+
+VERSION=$GO_LATEST_VERSION
+# VERSION="1.20.6"
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
