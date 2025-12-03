@@ -2,10 +2,29 @@
 # shellcheck disable=SC2016
 set -e
 
-VERSION="1.24.4"
+FALLBACK_VERSION="1.24.4"
+VERSION="$FALLBACK_VERSION"
 
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
+
+# Function to detect the latest Go version from go.dev
+get_latest_version() {
+    local latest_version=""
+
+    if hash wget 2>/dev/null; then
+        latest_version=$(wget -qO- "https://go.dev/VERSION?m=text" 2>/dev/null | head -n 1 | sed 's/go//')
+    elif hash curl 2>/dev/null; then
+        latest_version=$(curl -sL "https://go.dev/VERSION?m=text" 2>/dev/null | head -n 1 | sed 's/go//')
+    fi
+
+    # Validate version format
+    if [[ "$latest_version" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+        echo "$latest_version"
+    else
+        echo ""
+    fi
+}
 
 OS="$(uname -s)"
 ARCH="$(uname -m)"
@@ -117,6 +136,18 @@ elif [ ! -z "$1" ]; then
     exit 1
 fi
 
+# Auto-detect latest version if --version was not specified
+if [ "$VERSION" == "$FALLBACK_VERSION" ]; then
+    echo "Detecting latest Go version..."
+    DETECTED_VERSION=$(get_latest_version)
+    if [ -n "$DETECTED_VERSION" ]; then
+        VERSION="$DETECTED_VERSION"
+        echo "Latest version detected: $VERSION"
+    else
+        echo "Could not detect latest version, using fallback: $VERSION"
+    fi
+fi
+
 if [ -d "$GOROOT" ]; then
     echo "The Go install directory ($GOROOT) already exists. Exiting."
     exit 1
@@ -127,9 +158,9 @@ TEMP_DIRECTORY=$(mktemp -d)
 
 echo "Downloading $PACKAGE_NAME ..."
 if hash wget 2>/dev/null; then
-    wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
+    wget https://dl.google.com/go/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
 else
-    curl -o "$TEMP_DIRECTORY/go.tar.gz" https://storage.googleapis.com/golang/$PACKAGE_NAME
+    curl -o "$TEMP_DIRECTORY/go.tar.gz" https://dl.google.com/go/$PACKAGE_NAME
 fi
 
 if [ $? -ne 0 ]; then
